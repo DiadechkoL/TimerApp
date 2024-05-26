@@ -1,0 +1,7 @@
+.stat_form{
+    position: absolute;
+left: 150px;
+padding-top: 50px;
+display: flex;
+gap: 20px;
+flex-direction: column;}

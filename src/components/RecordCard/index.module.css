@@ -1,0 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+.card{
+    border: 8px solid rgb(183, 167, 213);
+    border-radius: 10px;
+    background-color: rgb(234, 219, 236);
+    width: 800px;
+    height: 600px;
+    font-family: 'ABeeZee';
+    position: relative;
+   
+}
+.card input
+{
+    height: 45px;
+    width: 300px;
+    border-radius:5px;
+   
+    padding-bottom: 24px;
+}
+.card input[type="text"] {
+    color: rgb(0, 0, 0); 
+    font-size: 24px;
+    text-align: center;
+  }
+
+.card button{
+    height: 35px;
+    width: 200px;
+    background-color:rgb(124, 91, 185);
+    border: 5px solid rgb(124, 91, 185);
+    border-radius: 5px;
+    font-family:'ABeeZee' ;
+    color: black;
+    font-weight: 600;
+    position: absolute;
+    left: 25px;
+    bottom: 35px;
+    font-size: 25px;
+    text-align: center;
+    margin: 24px;
+}
+.card h2{
+    padding: 24px 24px 8px 24px;
+    font-size: 53px;
+}
+.card p:first-of-type{
+font-weight: 400;
+font-size: 16px;
+font-style: italic;
+padding: 8px 24px 24px 24px;
+}
+
+.card p:last-of-type{
+    font-size: 30px;
+    font-weight: 400;
+    padding:24px;
+    
+}
+.card div{
+    display: flex;
+    gap: 20px;
+}
+.card>div>p{
+    padding-bottom: 24px;
+}
