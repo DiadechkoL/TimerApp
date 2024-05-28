@@ -4,8 +4,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Context } from '../../context';
 
+
 export default function AddTimerForm() {
-    const {data} = useContext(Context);
+    const {addTime} = useContext(Context);
     const{time, setTime} = useContext(Context);
 
 
@@ -14,7 +15,7 @@ export default function AddTimerForm() {
 
         const {date , name , category , check_in , check_out  } = event.target;
 
-        const add_time ={
+        const newTime ={
           id: Date.now(),
           date:date.value,
           name:name.value,
@@ -24,19 +25,12 @@ export default function AddTimerForm() {
 
       }
       
-        setTime([...time, add_time]);
-       data(add_time);
-
-
-        localStorage.setItem('add_time', JSON.stringify([...time, add_time]));
+      
+       addTime(newTime);
 
         event.target.reset();
        
-    
-    }
-  
-    
-     
+    } 
     const [date , setDate] = useState(new Date());
 
 

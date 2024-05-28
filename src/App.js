@@ -7,25 +7,43 @@ import CategoryTimePage from './pages/CategoryTimePage';
 import StatisticPage from './pages/StatisticPage';
 import { useEffect, useState } from 'react';
 import { Context } from './context';
+import  { db} from './firebase';
+import { ref, onValue, set, off } from "firebase/database";
 function App() {
 
-  const [time, setTime] = useState(() => {
-    const savedTime = localStorage.getItem('add_time');
-    return savedTime ? JSON.parse(savedTime) : [];
-  });
+  const [time, setTime] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('add_time', JSON.stringify(time));
-  }, [time]);
+    const dataRef = ref(db, 'add_time');
+    const unsubscribe = onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      setTime(data ? Object.values(data) : []);
+    });
+    return () => {
+      
+      off(dataRef, 'value', unsubscribe);
+    };
+  }, []);
 
-  const data = add_time => {setTime([...time , add_time])
+  const addTime = (newTime) => {
+    const newId = Date.now();
+    const updatedTime = { ...newTime, id: newId };
+    
+    set(ref(db, `add_time/${newId}`), updatedTime);
+    setTime((prevTime) => [...prevTime, updatedTime]);
+  };
+
+  const updateTime = (updatedTime) => {
+    
+    set(ref(db, `add_time/${updatedTime.id}`), updatedTime);
+    setTime((prevTime) => prevTime.map((time) => (time.id === updatedTime.id ? updatedTime : time)));
   };
   
 
 
   return (
     <div >
-      <Context.Provider value={{data , time, setTime}}>
+      <Context.Provider value={{ time, setTime, addTime, updateTime}}>
      <NavMenu/>
 
      <Routes>

@@ -5,6 +5,8 @@ import { Context } from '../../context'
 
 export default function RecordCard({id, name, date, category,check_in, check_out }) {
 
+  const {updateTime} = useContext(Context);
+
   const{time, setTime} = useContext(Context);
 
   const [newCheckIn , setNewCheckIn] = useState(check_in );
@@ -23,18 +25,17 @@ useEffect(() => {
     
 };
 
-const changeTime = (id, newCheckIn, newCheckOut) => {
-  const targetTime = time.find(time => time.id === id);
-  targetTime.check_in = newCheckIn;
-  targetTime.check_out = newCheckOut;
-  setTime([...time]);
-}; 
+
 
        
 
 const handleCheckOutChange = (event) => {
     setNewCheckOut(event.target.value);
     
+};
+
+const saveChanges = () => {
+  updateTime({ id, name, date, category, check_in: newCheckIn, check_out: newCheckOut });
 };
 
 
@@ -54,7 +55,7 @@ const handleCheckOutChange = (event) => {
                 <input type="text" value={newCheckOut} onChange={handleCheckOutChange} />
             </div>
 
-            <button onClick={() => changeTime(id)}>Save</button>
+            <button onClick={saveChanges}>Save</button>
        
       
     </div>
